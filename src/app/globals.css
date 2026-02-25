@@ -3,103 +3,90 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
-    --primary: 43 56% 59%; /* Gold-ish */
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 43 56% 59%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 43 56% 59%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 0 0% 0%; /* Pure black background */
-    --foreground: 0 0% 90%;
-    --card: 240 6% 4%;
-    --card-foreground: 0 0% 90%;
-    --popover: 240 6% 4%;
-    --popover-foreground: 0 0% 90%;
-    --primary: 43 56% 59%; /* Subtle Gold #D1AA5B */
-    --primary-foreground: 0 0% 10%;
-    --secondary: 240 4% 16%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 4% 16%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 43 56% 59%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 16%;
-    --input: 240 4% 16%;
-    --ring: 43 56% 59%;
-  }
+    :root {
+        --background: 0 0% 0%; /* Pure black background */
+        --foreground: 0 0% 85%; /* Soft light gray */
+        --card: 240 6% 4%;
+        --card-foreground: 0 0% 85%;
+        --popover: 240 6% 4%;
+        --popover-foreground: 0 0% 85%;
+        --primary: 43 56% 59%; /* Subtle Gold #D1AA5B */
+        --primary-foreground: 0 0% 15%;
+        --secondary: 240 4% 16%;
+        --secondary-foreground: 0 0% 95%;
+        --muted: 240 4% 16%;
+        --muted-foreground: 0 0% 60%;
+        --accent: 43 56% 59%;
+        --accent-foreground: 0 0% 95%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 4% 16%;
+        --input: 240 4% 16%;
+        --ring: 43 56% 59%;
+        --radius: 0.5rem;
+    }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground font-body;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-headline;
-    color: #d0d0d0 !important; /* Force #d0d0d0 for all headings as requested */
-  }
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground font-body;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-headline;
+        color: #d0d0d0 !important; /* Force #d0d0d0 for all headings as requested */
+    }
 }
 
 .parallax-container {
-  position: relative;
-  height: 200vh;
+    position: relative;
+    height: 200vh;
 }
 
 .parallax-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
 }
 
 canvas {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+    background: hsl(var(--background));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.3);
+    background: hsl(var(--primary) / 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary));
+    background: hsl(var(--primary));
 }
 
 .text-reveal {
-  background: linear-gradient(to right, #d0d0d0 50%, hsl(var(--muted-foreground)) 50%);
-  background-size: 200% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  transition: background-position 0.5s ease-out;
+    background: linear-gradient(
+        to right,
+        #d0d0d0 50%,
+        hsl(var(--muted-foreground)) 50%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    transition: background-position 0.5s ease-out;
 }
