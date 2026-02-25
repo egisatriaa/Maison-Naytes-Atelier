@@ -27,7 +27,7 @@
   }
 
   .dark {
-    --background: 240 6% 4%; /* Deep charcoal #131315-ish */
+    --background: 0 0% 0%; /* Pure black background */
     --foreground: 0 0% 90%;
     --card: 240 6% 4%;
     --card-foreground: 0 0% 90%;
@@ -58,12 +58,13 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline;
+    color: #d0d0d0 !important; /* Force #d0d0d0 for all headings as requested */
   }
 }
 
 .parallax-container {
   position: relative;
-  height: 200vh; /* Control the scroll distance to play the animation */
+  height: 200vh;
 }
 
 .parallax-sticky {
@@ -96,7 +97,7 @@ canvas {
 }
 
 .text-reveal {
-  background: linear-gradient(to right, hsl(var(--foreground)) 50%, hsl(var(--muted-foreground)) 50%);
+  background: linear-gradient(to right, #d0d0d0 50%, hsl(var(--muted-foreground)) 50%);
   background-size: 200% 100%;
   background-clip: text;
   -webkit-background-clip: text;

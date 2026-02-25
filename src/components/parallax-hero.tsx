@@ -15,7 +15,6 @@ export function ParallaxHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [frameIndex, setFrameIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Draw frame on index change
   useEffect(() => {
@@ -51,53 +50,38 @@ export function ParallaxHero() {
   }, [activeFragrance.frameCount]);
 
   const switchFragrance = (direction: 'next' | 'prev') => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentIndex((prev) => {
-        if (direction === 'next') return (prev + 1) % FRAGRANCES.length;
-        return (prev - 1 + FRAGRANCES.length) % FRAGRANCES.length;
-      });
-      setIsTransitioning(false);
-    }, 400);
+    // Removed 1-frame transition delay for immediate response
+    setCurrentIndex((prev) => {
+      if (direction === 'next') return (prev + 1) % FRAGRANCES.length;
+      return (prev - 1 + FRAGRANCES.length) % FRAGRANCES.length;
+    });
   };
 
   return (
     <div ref={containerRef} className="parallax-container" id="hero">
-      <div className="parallax-sticky flex items-center justify-center">
+      <div className="parallax-sticky flex items-center justify-center bg-black">
         {/* Cinematic Background Canvas */}
         <canvas 
           ref={canvasRef} 
           width={1920} 
           height={1080} 
-          className="absolute inset-0 z-0 pointer-events-none opacity-80" 
+          className="absolute inset-0 z-0 pointer-events-none opacity-100" 
         />
         
-        {/* Loading Overlay */}
+        {/* Progress indicator instead of full-page white/gray overlay */}
         {!isLoaded && (
-          <div className="absolute inset-0 z-50 bg-background flex flex-col items-center justify-center">
-            <div className="text-4xl font-headline mb-8 tracking-widest text-primary animate-pulse">
-              MAISON NAYTÉS
-            </div>
-            <div className="w-64 h-0.5 bg-muted overflow-hidden relative">
-              <div 
-                className="absolute left-0 top-0 h-full bg-primary transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-            <div className="mt-4 text-[10px] tracking-widest opacity-50 uppercase">
-              Loading Collection {progress}%
-            </div>
+          <div className="absolute top-0 left-0 w-full h-1 z-50">
+            <div 
+              className="h-full bg-primary transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            />
           </div>
         )}
 
         {/* Content Overlay */}
         <div className="relative z-10 w-full h-full max-w-[1400px] mx-auto px-8 flex items-center pointer-events-none">
-          <div className={cn(
-            "w-full max-w-xl transition-all duration-500 ease-in-out pointer-events-auto",
-            isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-          )}>
-            <h1 className="text-6xl md:text-8xl font-headline font-black leading-tight mb-2 tracking-tighter">
+          <div className="w-full max-w-xl pointer-events-auto">
+            <h1 className="text-6xl md:text-8xl font-headline font-black leading-tight mb-2 tracking-tighter text-[#d0d0d0]">
               {activeFragrance.name}
             </h1>
             <p className="text-sm md:text-base font-medium tracking-[0.3em] text-primary uppercase mb-6">
@@ -148,7 +132,7 @@ export function ParallaxHero() {
               <div className="absolute right-12 top-1/2 -translate-y-1/2 text-[10px] tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">NEXT</div>
             </button>
           </div>
-          {isTransitioning && (
+          {!isLoaded && (
             <div className="mt-4">
               <Loader2 className="h-4 w-4 animate-spin text-primary" />
             </div>
